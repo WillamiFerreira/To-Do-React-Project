@@ -1,0 +1,30 @@
+@mixin btn_base($color:black){
+    display: inline-flex;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 2px solid $color;
+    font-weight: 700;
+    background-color: white;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $color;
+        color: white;
+    }
+}
+
+.excluir_btn{
+    @include btn_base($color: red)
+
+}
+
+.salvar_btn{
+    @include btn_base($color: green)
+
+}
+
+.editar_btn{
+    @include btn_base()
+}

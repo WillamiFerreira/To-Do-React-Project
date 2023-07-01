@@ -1,11 +1,16 @@
-import ListView from "./components/List View/ListView"
+import { Outlet } from "react-router-dom"
+//import ListView from "./components/List View/ListView"
+//import Home from "./routes/Home/Home"
+
 
 function App() {
 
 
   return (
     <>
-    <ListView />
+    {/*<ListView />*/}
+    {/*<Home />*/}
+    <Outlet />
     </>
   )
 }

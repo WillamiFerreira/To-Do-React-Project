@@ -7,7 +7,6 @@ const ListView = () => {
         "Task 03",
         "Task 04",
         "Task 05",
-        "Task 06"
     ]
 
     return (
