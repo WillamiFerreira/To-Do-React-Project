@@ -1,23 +1,33 @@
-import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 import ListItem from '../List Item/ListItem';
 import styles from './ListView.module.scss'
 
 const ListView = () => {
-    const tasks = [
-        "Task 01",
-        "Task 02",
-        "Task 03",
-        "Task 04",
-        "Task 05",
-    ]
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log('fetch sendo chamada')
+            try {
+                axios.get('http://localhost:3000/tasks')
+                .then(res => setData(res.data))
+            }catch(err){
+                console.log('Mano, deu esse erro aqui ==> ' + {err})
+            }
+            
+        }
+        fetchData()
+    }, [])
 
     return (
-        <div className={styles.container}>
+        <div className={styles.containertemId}>
             <div className="list">
                 <ul>
                     {
-                        tasks.map(task => (
-                            <li key={task}><ListItem itemId={tasks.indexOf(task)}>{task}</ListItem></li>
+                        data.map(task => (
+                            <li key={task.id}><ListItem itemId={task.id}>{task.name}</ListItem></li>
                         ))
                     }
                 </ul>
