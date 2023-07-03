@@ -27,7 +27,7 @@ const ListView = () => {
                 <ul>
                     {
                         data.map(task => (
-                            <li key={task.id}><ListItem itemId={task.id}>{task.name}</ListItem></li>
+                            <li key={task.id}><ListItem itemId={data[Number(data.id)]}>{task.name}</ListItem></li>
                         ))
                     }
                 </ul>
