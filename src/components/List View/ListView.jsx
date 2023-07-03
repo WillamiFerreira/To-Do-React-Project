@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+import ListItem from '../List Item/ListItem';
 import styles from './ListView.module.scss'
 
 const ListView = () => {
@@ -15,7 +17,7 @@ const ListView = () => {
                 <ul>
                     {
                         tasks.map(task => (
-                            <li key={task}>{task}</li>
+                            <li key={task}><ListItem itemId={tasks.indexOf(task)}>{task}</ListItem></li>
                         ))
                     }
                 </ul>

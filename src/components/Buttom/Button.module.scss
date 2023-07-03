@@ -28,3 +28,8 @@
 .editar_btn{
     @include btn_base()
 }
+
+.adicionar_task_btn{
+    @include btn_base($color: rgb(0, 4, 255))
+
+}
