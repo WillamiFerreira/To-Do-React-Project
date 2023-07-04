@@ -1,14 +1,17 @@
 import Buttom from '../../components/Buttom/Buttom'
+import SelectCategory from '../../components/SelectCategory/SelectCategory';
 import {useNavigate} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+
+
 
 import styles from './AddNewTask.module.scss'
 
 
 const AddNewTask = () => {
     const navigate = useNavigate();
-    const [categories, setCategories] = useState([]);
+    //const [categories, setCategories] = useState([]);
     const defaultInputValues = {
         "status": "to-do",
     }
@@ -16,7 +19,7 @@ const AddNewTask = () => {
 
 
     //chamando as categorias do JSON------------------------
-    useEffect (() => {
+    /*useEffect (() => {
         const fetchData = async () => {
             try{
                 axios.get('http://localhost:3000/tasks')
@@ -26,16 +29,18 @@ const AddNewTask = () => {
             }
         }
         fetchData()
-    }, [])
+    }, [])*/
 
     /*--------------------------------------*/
 
+    //Função que constroi o objeto
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setFormValues({...formValues, [name]: value})
 
-        
     }
+
+    //Enviando a task criada para o BD -----------------
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -70,17 +75,7 @@ const AddNewTask = () => {
                             </div>
 
                             <div className={styles.other_inputs}>
-                                
-                                
-                                    <label htmlFor='categories'>Categories
-                                        <select name="categories" onChange={handleInputChange} value={formValues.categories || ""}>
-                                            {
-                                                categories.map((category) => (
-                                                    <option key={category.id} value={category.name}>{category.name}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </label>   
+                                    <SelectCategory onChange={handleInputChange} value={formValues.categories || ""} />
                                 
 
                                     <label>Author<input type="text" name="author" onChange={handleInputChange} value={formValues.author || ""}/></label>
@@ -91,9 +86,7 @@ const AddNewTask = () => {
                                         <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange}/></label>
                                         <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange}/></label>
                                     </div>
-                                    <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={formValues.deadline}/>
-
-                                    </label>
+                                    <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={formValues.deadline}/></label>
                                 
                             </div>
 

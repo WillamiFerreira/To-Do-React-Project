@@ -1,9 +1,10 @@
 import styles from './TaskDetails.module.scss'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import Buttom from '../../components/Buttom/Buttom'
+import SelectCategory from '../../components/SelectCategory/SelectCategory';
 
 
 
@@ -12,14 +13,16 @@ import Buttom from '../../components/Buttom/Buttom'
 const TaskDetails = () => {
     const {id} = useParams();
     const [pickedTask, setPickedTask] = useState({});
-    //const [editedTask, setEditedTask] = useState({});
+    const [editedTask, setEditedTask] = useState({});
     const [showProjectForm, setshowProjectForm ] = useState(false);
+    const navigate = useNavigate()
+
 
     useEffect(()=>{
         const fetchData = async () => {
             try{
                 axios.get(`http://localhost:3000/tasks/${id}`)
-                .then(res => setPickedTask(res.data));
+                .then(res => setPickedTask(res.data))
             }catch(err){
                 console.log("Deu erro, meu patrão ==> ", err)
             }
@@ -28,10 +31,50 @@ const TaskDetails = () => {
 
     }, [id])
 
-    console.log(pickedTask)
+    //Atribuindo o valor do primeiro state ao segundo
+    useEffect(() =>{
+        setEditedTask(pickedTask)
+    }, [pickedTask])
 
     const toggleProjectForm = () =>{
         setshowProjectForm(!showProjectForm)
+    }
+
+    const handleInputChange = (e) => {
+        e.preventDefault()
+        const {name, value} = e.target;
+        setEditedTask({...editedTask, [name]: value})
+    }
+
+    const editPost = async (e) => {
+        //Função vai enviar uma requisição PUT uma tarefa do id recebido
+        //pela URI com um novo objeto.
+        e.preventDefault();
+        //console.log(typeof pickedTask)
+        const formData = new FormData(e.target);
+
+
+        try{
+            axios.put(`http://localhost:3000/tasks/${id}`, Object.fromEntries(formData) )
+            toggleProjectForm()
+
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+    const excluirTask = async () => {
+
+        try{
+            axios.delete(`http://localhost:3000/tasks/${id}`)
+            .then(res => console.log(res))
+
+        } catch(err){
+            console.log("erro ao deletar" + err)
+        }
+
+        navigate('/')
+
     }
 
 
@@ -53,20 +96,61 @@ const TaskDetails = () => {
 
                                 </div>
                             ): (
+                                //-------------------------------
+                                //Form de edição ----------------
                                 <div>
-                                    <form >
+                                    <form onSubmit={editPost} >
+                                        <label htmlFor="title">Title</label>
+                                        <input type="text" id='title' name="title" onChange={handleInputChange} value={editedTask.title || ""} />
+                                        <SelectCategory />
+                                        <label>Author<input type="text" name="author" onChange={handleInputChange} value={editedTask.author || ""}/></label>
+                                        <div>
+                                        <p>Status</p>
+                                            <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange} checked={ editedTask.status === 'to-do' ? true : false }/></label>
+                                            <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange} checked={ editedTask.status === 'doing' ? true : false }/></label>
+                                            <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange} checked={ editedTask.status === 'done' ? true : false }/></label>
+                                        </div>
+                                        <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={editedTask.deadline}/></label>
+                                        <label htmlFor="description">Description</label>
+
+                                        <textarea 
+                                            name="description" 
+                                            id="description" 
+                                            cols="50" 
+                                            rows="6" 
+                                            placeholder='Esse campo é opcional'
+                                            onChange={handleInputChange}
+                                            value={editedTask.description || undefined}
+                                         />
+                                        
+
 
 
                                         <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
+
                                     </form>
                                 </div>
                             )
                         }
                         <button onClick={toggleProjectForm}>
                             {
-                                !showProjectForm ? 'Editar Projeto' : 'Fechar'
+                                !showProjectForm ? 'Editar Task' : 'Fechar'
                             }
                         </button>
+
+                        
+                        { 
+                            !showProjectForm && (
+                                <button onClick={excluirTask}>
+                                {
+                                    !showProjectForm ? 'Excluir Task' : 'Fechar'
+                                }
+                                </button>
+
+                            )
+
+                        }
+
                     </div>
 
                 ) : (
