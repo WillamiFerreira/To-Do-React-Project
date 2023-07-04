@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <div className={styles.container}>
             <div>
-            <Button onClick={toAddNewTaskPage} style='adicionar_task_btn'>Add New Task</Button>
+            <Button onClick={toAddNewTaskPage}>Add New Task</Button>
             <ListView />
             </div>
             <Outlet />

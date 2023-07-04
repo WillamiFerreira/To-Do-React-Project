@@ -81,6 +81,7 @@ const TaskDetails = () => {
 
     return (
         <div className={styles.container}>
+            <Buttom onClick={() => navigate('/')}>Voltar</Buttom>
             {
                 pickedTask.title ? (
                     <div>
@@ -91,6 +92,7 @@ const TaskDetails = () => {
                                     <h3><span>Status: </span>{pickedTask.status}</h3>
                                     <h3><span>Author: </span>{pickedTask.author}</h3>
                                     <h3><span>Category: </span>{pickedTask.categories}</h3>
+                                    <h3><span>Criation date: </span>{pickedTask.data}</h3>
                                     <h3><span>DeadLine: </span>{pickedTask.deadline}</h3>
                                     <span>Description:</span> {pickedTask.description}
 
@@ -132,25 +134,18 @@ const TaskDetails = () => {
                                 </div>
                             )
                         }
-                        <button onClick={toggleProjectForm}>
-                            {
-                                !showProjectForm ? 'Editar Task' : 'Fechar'
+
+                        <div className={styles.exclui_e_editar_btns_ct}>
+                            { !showProjectForm && (
+                                    <button onClick={excluirTask}>
+                                        {!showProjectForm ? 'Excluir Task' : 'Fechar'}
+                                    </button>
+                                )
                             }
-                        </button>
-
-                        
-                        { 
-                            !showProjectForm && (
-                                <button onClick={excluirTask}>
-                                {
-                                    !showProjectForm ? 'Excluir Task' : 'Fechar'
-                                }
-                                </button>
-
-                            )
-
-                        }
-
+                            <button onClick={toggleProjectForm}>
+                                {!showProjectForm ? 'Editar Task' : 'Fechar'}
+                            </button>
+                        </div>
                     </div>
 
                 ) : (

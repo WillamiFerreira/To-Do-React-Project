@@ -108,8 +108,9 @@ const AddNewTask = () => {
                             </textarea>
                         </div>
                     </div>
-                    <div className="save_task_btn">
-                        <Buttom style='salvar_btn' type='submit'>Save task</Buttom>
+                    <div className={styles.save_task_btn_ct}>
+                        <Buttom onClick={() => navigate('/')}>Voltar</Buttom>
+                        <Buttom type='submit'>Save task</Buttom>
                     </div>
                 </form>
 

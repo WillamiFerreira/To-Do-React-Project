@@ -1,4 +1,13 @@
-form > div{
+
+.save_task_btn_ct{
+    display: flex;
+    justify-content: space-between;
+    
+    border: 1px solid black;
+
+}
+
+form > div:first-child{
     border: 1px solid black;
     display: flex;
     justify-content: space-between;
