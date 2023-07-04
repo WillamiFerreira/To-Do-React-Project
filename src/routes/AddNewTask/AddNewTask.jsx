@@ -22,14 +22,27 @@ const AddNewTask = () => {
             }
         }
         fetchData()
-        console.log(categories)
+        //console.log(categories)
     }, [])
 
-    const returnToHome = () =>{
-
+    const addTask = async (newTask) => {
+        try{
+            axios.post('http://localhost:3000/tasks', {newTask})
+            .then(res => {
+                console.log(res)
+                
+            } )
+        } catch(err){
+            console.log('A porra do erro =>' + {err})
+        }
         navigate('/')
-    
     }
+
+    /*addTask({
+        "id": "56",
+        "name": "Gabriel"
+    })*/
+
     return (
         <div className={styles.container}>
             <div className={styles.form_ct}>
@@ -64,7 +77,7 @@ const AddNewTask = () => {
                             </textarea>
                         </div>
                     </div>
-                <Buttom onClick={returnToHome} style='salvar_btn'>Save task</Buttom>
+                <Buttom onClick={addTask} style='salvar_btn'>Save task</Buttom>
                 </form>
             </div>
 
