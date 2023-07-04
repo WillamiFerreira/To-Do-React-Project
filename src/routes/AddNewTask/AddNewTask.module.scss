@@ -15,20 +15,20 @@ form > div{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid blueviolet;
+    //border: 1px solid blueviolet;
 
     .form_ct{
         width: 600px;
-        height: 400px;
         border: 2px solid red;
         border-radius: 12px;
+        padding: 10px;
     }
 
 }
 
 .inputs_ct{
     max-width: 45%;
-    border: 1px solid orange;
+    //border: 1px solid orange;
     width: fit-content;
 
     .title_ct{

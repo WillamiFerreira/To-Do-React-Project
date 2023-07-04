@@ -9,7 +9,6 @@ const ListView = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('fetch sendo chamada')
             try {
                 axios.get('http://localhost:3000/tasks')
                 .then(res => setData(res.data))
@@ -27,7 +26,7 @@ const ListView = () => {
                 <ul>
                     {
                         data.map(task => (
-                            <li key={task.id}><ListItem itemId={data[Number(data.id)]}>{task.name}</ListItem></li>
+                            <li key={task.id}><ListItem itemId={data[Number(data.title)]}>{task.title}</ListItem></li>
                         ))
                     }
                 </ul>

@@ -8,10 +8,14 @@ import styles from './AddNewTask.module.scss'
 
 const AddNewTask = () => {
     const navigate = useNavigate();
-    const [title, setTitle] = useState('');
     const [categories, setCategories] = useState([]);
-    //const [newTask, setNewTask] = useState({});
+    const defaultInputValues = {
+        "status": "to-do",
+    }
+    const [formValues, setFormValues] = useState({...defaultInputValues});
 
+
+    //chamando as categorias do JSON------------------------
     useEffect (() => {
         const fetchData = async () => {
             try{
@@ -22,65 +26,101 @@ const AddNewTask = () => {
             }
         }
         fetchData()
-        //console.log(categories)
     }, [])
 
-    const addTask = async (newTask) => {
+    /*--------------------------------------*/
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setFormValues({...formValues, [name]: value})
+
+        
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
         try{
-            axios.post('http://localhost:3000/tasks', {newTask})
-            .then(res => {
-                console.log(res)
-                
-            } )
+            axios.post('http://localhost:3000/tasks', Object.fromEntries(formData))
         } catch(err){
             console.log('A porra do erro =>' + {err})
         }
+
+
         navigate('/')
     }
 
-    /*addTask({
-        "id": "56",
-        "name": "Gabriel"
-    })*/
+    //console.log(formValues)
 
     return (
         <div className={styles.container}>
             <div className={styles.form_ct}>
                 <h1>
-                    {!title ? "Task Name" : title}
+                    {!formValues.title ? "Task Name" : formValues.title}
                 </h1>
-                <form>
+
+                <form onSubmit={handleSubmit}>
                     <div>
                         <div className={styles.inputs_ct}>
+
                             <div className={styles.title_ct}>
                                 <label htmlFor="title">Title</label>
-                                <input onChange={(e) => setTitle(e.target.value)} type="text" id='title' />
+                                <input type="text" id='title' name="title" onChange={handleInputChange} value={formValues.title || ""}   />
                             </div>
+
                             <div className={styles.other_inputs}>
-                                <label htmlFor="">Category
-                                    <select name="" id="">
-                                        {
-                                            categories.map((categorie) => (
-                                                <option key={categorie.id}>{categorie.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </label>
-                                <label htmlFor="">Author<input type="text" /></label>
-                                <label htmlFor="">Status<input type="text" /></label>
-                                <label htmlFor="">Endline<input type="date"/></label>
+                                
+                                
+                                    <label htmlFor='categories'>Categories
+                                        <select name="categories" onChange={handleInputChange} value={formValues.categories || ""}>
+                                            {
+                                                categories.map((category) => (
+                                                    <option key={category.id} value={category.name}>{category.name}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </label>   
+                                
+
+                                    <label>Author<input type="text" name="author" onChange={handleInputChange} value={formValues.author || ""}/></label>
+
+                                    <div className={styles.radios}>
+                                        <p>Status</p>
+                                        <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange}/></label>
+                                        <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange}/></label>
+                                        <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange}/></label>
+                                    </div>
+                                    <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={formValues.deadline}/>
+
+                                    </label>
+                                
                             </div>
+
                         </div>
+
                         <div className={styles.text_area_ct}>
                             <label htmlFor="description">Description</label>
-                            <textarea name="" id="description" cols="20" rows="10" placeholder='Esse campo é opcional'>
+
+                            <textarea 
+                            name="description" 
+                            id="description" 
+                            cols="20" 
+                            rows="10" 
+                            placeholder='Esse campo é opcional'
+                            onChange={handleInputChange}
+                            value={formValues.description || undefined}
+
+                            >
                             </textarea>
                         </div>
                     </div>
-                <Buttom onClick={addTask} style='salvar_btn'>Save task</Buttom>
+                    <div className="save_task_btn">
+                        <Buttom style='salvar_btn' type='submit'>Save task</Buttom>
+                    </div>
                 </form>
-            </div>
 
+            </div>
         </div>
     );
 };
