@@ -131,7 +131,7 @@ const TaskDetails = () => {
                             }
                             <div className={styles.exclui_e_editar_btns_ct}>
                                 { !showProjectForm && (
-                                        <Buttom onClick={excluirTask}>
+                                        <Buttom onClick={excluirTask}  >
                                             {!showProjectForm ? 'Excluir Task' : 'Fechar'}
                                         </Buttom>
                                 )}

@@ -25,11 +25,12 @@ const ListView = () => {
             <div className="list">
                 <ul>
                     {data.map(task => (
-                            <li 
-                            key={task.id}>
-                                <ListItem itemId={task.id}>{task.title}</ListItem>
-                            </li>
-                        ))}
+                        <li 
+                        key={task.id}>
+                            <ListItem itemId={task.id}>{task.title}</ListItem>
+                        </li>
+
+                    ))}
                 </ul>
             </div>
 

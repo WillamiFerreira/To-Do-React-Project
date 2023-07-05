@@ -101,7 +101,7 @@ const AddNewTask = () => {
                             >
                             </textarea>
                             */}
-                            <TextAreaInput placeholder="Campo Opcional" />
+                            <TextAreaInput placeholder="Campo Opcional" name="description" onChange={handleInputChange} value={formValues.description || undefined}   />
                         </div>
                     </div>
                     <div className={styles.save_task_btn_ct}>
