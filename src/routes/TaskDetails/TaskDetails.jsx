@@ -18,7 +18,9 @@ const TaskDetails = () => {
     const navigate = useNavigate()
 
 
-    useEffect(()=>{
+
+     useEffect(()=>{
+
         const fetchData = async () => {
             try{
                 axios.get(`http://localhost:3000/tasks/${id}`)
@@ -47,24 +49,20 @@ const TaskDetails = () => {
     }
 
     const editPost = async (e) => {
-        //Função vai enviar uma requisição PUT uma tarefa do id recebido
-        //pela URI com um novo objeto.
-        e.preventDefault();
-        //console.log(typeof pickedTask)
+        e.preventDefault()
         const formData = new FormData(e.target);
-
-
         try{
             axios.put(`http://localhost:3000/tasks/${id}`, Object.fromEntries(formData) )
             toggleProjectForm()
-
         } catch(err){
             console.log(err)
-        }
+        }  
+
+        navigate('/')
     }
 
-    const excluirTask = async () => {
-
+    const excluirTask = async (e) => {
+        e.preventDefault()
         try{
             axios.delete(`http://localhost:3000/tasks/${id}`)
             .then(res => console.log(res))
@@ -124,10 +122,6 @@ const TaskDetails = () => {
                                             onChange={handleInputChange}
                                             value={editedTask.description || undefined}
                                          />
-                                        
-
-
-
                                         <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
 
                                     </form>
@@ -140,8 +134,7 @@ const TaskDetails = () => {
                                     <button onClick={excluirTask}>
                                         {!showProjectForm ? 'Excluir Task' : 'Fechar'}
                                     </button>
-                                )
-                            }
+                            )}
                             <button onClick={toggleProjectForm}>
                                 {!showProjectForm ? 'Editar Task' : 'Fechar'}
                             </button>

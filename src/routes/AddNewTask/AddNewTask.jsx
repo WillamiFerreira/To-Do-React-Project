@@ -51,11 +51,8 @@ const AddNewTask = () => {
         } catch(err){
             console.log('A porra do erro =>' + {err})
         }
-
-
         navigate('/')
     }
-
     //console.log(formValues)
 
     return (
