@@ -3,12 +3,12 @@
     display: flex;
     justify-content: space-between;
     
-    border: 1px solid black;
+    //border: 1px solid black;
 
 }
 
 form > div:first-child{
-    border: 1px solid black;
+    //border: 1px solid black;
     display: flex;
     justify-content: space-between;
 
@@ -49,7 +49,7 @@ form > div:first-child{
     .other_inputs{
         display: flex;
         flex-direction: column;
-        border: 1px solid green;
+       
     }
 }
 

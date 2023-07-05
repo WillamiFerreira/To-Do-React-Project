@@ -1,8 +1,12 @@
 import{ useState, useEffect } from 'react';
 import axios from 'axios';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
-const SelectCategory = ({onChange, value}) => {
+const SelectCategory = ({onChange, value, label, name}) => {
     const [categories, setCategories] = useState([]);
     useEffect (() => {
         const fetchData = async () => {
@@ -17,7 +21,7 @@ const SelectCategory = ({onChange, value}) => {
     }, [])
 
     return (
-        <label> Category
+        /*<label> Category
             <select name="categories" onChange={onChange} value={value}>
                 {
                     categories.map((category) => (
@@ -25,7 +29,26 @@ const SelectCategory = ({onChange, value}) => {
                     ))
                 }
             </select>
-        </label>
+        </label>*/
+        <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label" >{label}</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={value}
+                name={name}
+                onChange={onChange}
+                label={label}
+
+            >
+                {
+                    categories.map((category)=>(
+                        <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
+                    ))
+                }
+
+            </Select>
+        </FormControl>
     );
 };
 

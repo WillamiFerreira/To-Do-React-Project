@@ -1,4 +1,5 @@
 import styles from './TaskDetails.module.scss'
+import CircularProgress from '@mui/joy/CircularProgress';
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -74,77 +75,79 @@ const TaskDetails = () => {
         navigate('/')
 
     }
-
-
-
     return (
         <div className={styles.container}>
-            <Buttom onClick={() => navigate('/')}>Voltar</Buttom>
-            {
-                pickedTask.title ? (
-                    <div>
+
+            <Buttom className={styles.comeBack_btn} onClick={() => navigate('/')}>voltar</Buttom>
+
+            
+                {pickedTask.id ? ( //verifica se existe a prop "id" na tarefa obtida pela requisição
+                    <>
                         <h1>{pickedTask.title}</h1>
-                        {
-                            !showProjectForm ? (
-                                <div>
-                                    <h3><span>Status: </span>{pickedTask.status}</h3>
-                                    <h3><span>Author: </span>{pickedTask.author}</h3>
-                                    <h3><span>Category: </span>{pickedTask.categories}</h3>
-                                    <h3><span>Criation date: </span>{pickedTask.data}</h3>
-                                    <h3><span>DeadLine: </span>{pickedTask.deadline}</h3>
-                                    <span>Description:</span> {pickedTask.description}
 
-                                </div>
-                            ): (
-                                //-------------------------------
-                                //Form de edição ----------------
-                                <div>
-                                    <form onSubmit={editPost} >
-                                        <label htmlFor="title">Title</label>
-                                        <input type="text" id='title' name="title" onChange={handleInputChange} value={editedTask.title || ""} />
-                                        <SelectCategory />
-                                        <label>Author<input type="text" name="author" onChange={handleInputChange} value={editedTask.author || ""}/></label>
-                                        <div>
-                                        <p>Status</p>
-                                            <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange} checked={ editedTask.status === 'to-do' ? true : false }/></label>
-                                            <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange} checked={ editedTask.status === 'doing' ? true : false }/></label>
-                                            <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange} checked={ editedTask.status === 'done' ? true : false }/></label>
+                        <div className={styles.task_data_and_buttons}>
+                            {
+                                !showProjectForm ? (
+                                    <div className={styles.task_data}>
+                                        <span></span> <div className={styles.desc_ct}>{pickedTask.description}</div>
+                                        <h3><span>Status: </span>{pickedTask.status}</h3>
+                                        <h3><span>Author: </span>{pickedTask.author}</h3>
+                                        <h3><span>Category: </span>{pickedTask.categories}</h3>
+                                        <div className={styles.dates}>
+                                            <h3><span>Criation date: </span>{pickedTask.data}</h3>
+                                            <h3><span>DeadLine: </span>{pickedTask.deadline}</h3>
                                         </div>
-                                        <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={editedTask.deadline}/></label>
-                                        <label htmlFor="description">Description</label>
-
-                                        <textarea 
-                                            name="description" 
-                                            id="description" 
-                                            cols="50" 
-                                            rows="6" 
-                                            placeholder='Esse campo é opcional'
-                                            onChange={handleInputChange}
-                                            value={editedTask.description || undefined}
-                                         />
-                                        <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
-
-                                    </form>
-                                </div>
-                            )
-                        }
-
-                        <div className={styles.exclui_e_editar_btns_ct}>
-                            { !showProjectForm && (
-                                    <button onClick={excluirTask}>
-                                        {!showProjectForm ? 'Excluir Task' : 'Fechar'}
-                                    </button>
-                            )}
-                            <button onClick={toggleProjectForm}>
-                                {!showProjectForm ? 'Editar Task' : 'Fechar'}
-                            </button>
+                                    </div>
+                                ): (
+                                    //-------------------------------
+                                    //Form de edição ----------------
+                                    <div>
+                                        <form onSubmit={editPost} >
+                                            <label htmlFor="title">Title</label>
+                                            <input type="text" id='title' name="title" onChange={handleInputChange} value={editedTask.title || ""} />
+                                            <SelectCategory />
+                                            <label>Author<input type="text" name="author" onChange={handleInputChange} value={editedTask.author || ""}/></label>
+                                            <div>
+                                            <p>Status</p>
+                                                <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange} checked={ editedTask.status === 'to-do' ? true : false }/></label>
+                                                <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange} checked={ editedTask.status === 'doing' ? true : false }/></label>
+                                                <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange} checked={ editedTask.status === 'done' ? true : false }/></label>
+                                            </div>
+                                            <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={editedTask.deadline}/></label>
+                                            <label htmlFor="description">Description</label>
+                                            <textarea
+                                                name="description"
+                                                id="description"
+                                                cols="50"
+                                                rows="6"
+                                                placeholder='Esse campo é opcional'
+                                                onChange={handleInputChange}
+                                                value={editedTask.description || undefined}
+                                             />
+                                            <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
+                                        </form>
+                                    </div>
+                                )
+                            }
+                            <div className={styles.exclui_e_editar_btns_ct}>
+                                { !showProjectForm && (
+                                        <Buttom onClick={excluirTask}>
+                                            {!showProjectForm ? 'Excluir Task' : 'Fechar'}
+                                        </Buttom>
+                                )}
+                                <Buttom onClick={toggleProjectForm}>
+                                    {!showProjectForm ? 'Editar Task' : 'Fechar'}
+                                </Buttom>
+                            </div>
                         </div>
-                    </div>
+                    </>
+                
+                ) : (//Tela com loading //enquando a prop "id" não tiver um valor válido, essa tela é mostrada
 
-                ) : (
-                    <p>Loading</p>
-                )
-            }
+                    <div className={styles.progress_screen}>
+                        <CircularProgress color="primary" className={styles.progress} />
+                    </div>
+                )}
         </div>
     );
 };
