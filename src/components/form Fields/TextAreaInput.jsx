@@ -9,7 +9,10 @@ const TextAreaInput = ({placeholder, value, onChange, name}) => {
             value={value} 
             onChange={onChange}
             name={name}
-            />
+            variant='outlined'
+            size='lg'
+            
+        />
     );
 };
 

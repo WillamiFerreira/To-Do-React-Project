@@ -1,14 +1,15 @@
 import TextField from '@mui/material/TextField'
 
-const TextInput = ({id, label, name, onChange, value, type}) => {
+const TextInput = ({id, name, onChange, value, type}) => {
     return (
         <TextField 
-            id={id || "outlined-basic"} 
-            label={label} 
+            id={id || "filled-basic"}
+            size='small'
+            fullWidth
             name={name} 
             type={type}
-            variant="filled" 
-            onChange={onChange} 
+            variant="outlined" 
+            onChange={onChange}
             value={value} autoComplete='off' />
 
     );

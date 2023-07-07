@@ -22,14 +22,16 @@ const SelectCategory = ({onChange, value, label, name}) => {
 
     return (
         <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" >{label}</InputLabel>
+            <InputLabel id="demo-simple-select-label"></InputLabel>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={value}
                 name={name}
                 onChange={onChange}
-                label={label}
+                size='small'
+                variant='outlined'
+                margin='dense'
 
             >
                 {

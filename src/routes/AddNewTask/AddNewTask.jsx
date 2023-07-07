@@ -1,13 +1,13 @@
-import Buttom from '../../components/Buttom/Buttom'
-import SelectCategory from '../../components/SelectCategory/SelectCategory';
+import styles from './AddNewTask.module.scss'
 import {useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import TextInput from '../../components/form Fields/TextInput';
 
-import styles from './AddNewTask.module.scss'
 import RowRadioButtonsGroup from '../../components/form Fields/RowRadioButtonsGroup';
+import SelectCategory from '../../components/SelectCategory/SelectCategory';
 import TextAreaInput from '../../components/form Fields/TextAreaInput';
+import TextInput from '../../components/form Fields/TextInput';
+import Buttom from '../../components/Buttom/Buttom'
 
 
 const AddNewTask = () => {
@@ -61,47 +61,74 @@ const AddNewTask = () => {
                         <div className={styles.inputs_ct}>
                             {/*--------------- Title Imput */}
 
-                            {/*<div className={styles.title_ct}>
-                                <label htmlFor="title">Title</label>
-                                <input type="text" id='title' name="title" onChange={handleInputChange} value={formValues.title || ""}   />
-                            </div>*/}
-                            <TextInput id="outlined-basic" label='Title' name='title' variant="outlined" onChange={handleInputChange} value={formValues.title || ""} />
+                            <label>
+                                <h4>Title</h4>
+                                <TextInput
+                                    id="outlined-basic"
+                                    name='title'
+                                    label='Title'
+                                    variant="outlined"
+                                    onChange={handleInputChange}
+                                    value={formValues.title || ""}
+                                />
+                            </label>
+                            
+                           
+                            <label>
+                                <h4>Category</h4>
+                                <SelectCategory
+                                    name="categories"
+                                    label='Category'
+                                    onChange={handleInputChange}
+                                    value={formValues.categories || ""}
+                                />
+                            </label>
 
-                            <div className={styles.other_inputs}>
-                                <SelectCategory onChange={handleInputChange} value={formValues.categories || ""} label='Category' name="categories" />
-                                <TextInput id="outlined-basic" label="Author" name="author" variant="filled" onChange={handleInputChange} value={formValues.author || ""} />
-                                {/*--------------- status */}
-                                {/*<div className={styles.radios}>
-                                    <p>Status</p>
-                                    <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange}/></label>
-                                    <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange}/></label>
-                                    <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange}/></label>
-                                </div>*/}
+                            <label>
+                                <h4>Author</h4>
+                                <TextInput
+                                id="outlined-basic"
+                                label="Author"
+                                name="author"
+                                variant="outlined"
+                                onChange={handleInputChange}
+                                value={formValues.author || ""}
+                                />
+                            </label>
 
-                                <RowRadioButtonsGroup values={optionValues} label='Status' onChange={handleInputChange} name="status"  />
-                                {/*Deadline ---------------- */}
-                                {/*<label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={formValues.deadline}/></label>*/}
-                                <TextInput id="date-input" type='date' label="Deadline" name="deadline" value={formValues.deadline} onChange={handleInputChange} />
-                            </div>
+                            <label>
+                                <h4>Status</h4>
+                                <RowRadioButtonsGroup
+                                values={optionValues}
+                                name="status"
+                                onChange={handleInputChange}
+                                />
+                            </label>
+
+                            <label>
+                                <h4>Deadline</h4>
+                                <TextInput
+                                id="date-input"
+                                type='date'
+                                label="Deadline"
+                                name="deadline"
+                                onChange={handleInputChange}
+                                value={formValues.deadline}
+                                />
+                            </label>
 
                         </div>
 
                         <div className={styles.text_area_ct}>
-                            <label htmlFor="description">Description</label>
+                            <label><h4>Description</h4>
 
-                            {/*<textarea 
-                            name="description" 
-                            id="description" 
-                            cols="20" 
-                            rows="10" 
-                            placeholder='Esse campo é opcional'
-                            onChange={handleInputChange}
+                            <TextAreaInput
+                            placeholder="Campo Opcional"
+                            name="description"
+                            onChange={handleInputChange} 
                             value={formValues.description || undefined}
-
-                            >
-                            </textarea>
-                            */}
-                            <TextAreaInput placeholder="Campo Opcional" name="description" onChange={handleInputChange} value={formValues.description || undefined}   />
+                            />
+                            </label>
                         </div>
                     </div>
                     <div className={styles.save_task_btn_ct}>
