@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 
 import Buttom from '../../components/Buttom/Buttom'
 import SelectCategory from '../../components/SelectCategory/SelectCategory';
+import TextAreaInput from '../../components/form Fields/TextAreaInput';
+import TextInput from '../../components/form Fields/TextInput';
+import RowRadioButtonsGroup from '../../components/form Fields/RowRadioButtonsGroup';
 
 
 
@@ -15,6 +18,7 @@ const TaskDetails = () => {
     const {id} = useParams();
     const [pickedTask, setPickedTask] = useState({});
     const [editedTask, setEditedTask] = useState({});
+    const optionValues = ['to-do', 'doing', 'done']
     const [showProjectForm, setshowProjectForm ] = useState(false);
     const navigate = useNavigate()
 
@@ -101,21 +105,83 @@ const TaskDetails = () => {
                                 ): (
                                     //-------------------------------
                                     //Form de edição ----------------
-                                    <div>
+                                    <div className={styles.form_ct}  >
                                         <form onSubmit={editPost} >
-                                            <label htmlFor="title">Title</label>
-                                            <input type="text" id='title' name="title" onChange={handleInputChange} value={editedTask.title || ""} />
-                                            <SelectCategory />
-                                            <label>Author<input type="text" name="author" onChange={handleInputChange} value={editedTask.author || ""}/></label>
-                                            <div>
-                                            <p>Status</p>
-                                                <label>to-do<input type="radio" name='status' value="to-do" onChange={handleInputChange} checked={ editedTask.status === 'to-do' ? true : false }/></label>
-                                                <label>Doing<input type="radio" name='status' value="doing" onChange={handleInputChange} checked={ editedTask.status === 'doing' ? true : false }/></label>
-                                                <label>Done<input type="radio" name='status' value="done" onChange={handleInputChange} checked={ editedTask.status === 'done' ? true : false }/></label>
-                                            </div>
-                                            <label>Deadline<input type="date" name="deadline" onChange={handleInputChange} value={editedTask.deadline}/></label>
-                                            <label htmlFor="description">Description</label>
-                                            <textarea
+                                            <label> <h4>Title</h4>
+                                                <TextInput 
+                                                    type='text'
+                                                    name='title'
+                                                    value={editedTask.title}
+                                                    onChange={handleInputChange} 
+                                                />
+                                            </label>
+                                            <label><h4>Author</h4>
+                                                <TextInput
+                                                    type="text" 
+                                                    name="author" 
+                                                    onChange={handleInputChange} 
+                                                    value={editedTask.author || ""}
+                                                />
+                                            </label>
+
+                                            
+                                            <label>
+                                                <h4>Status</h4>
+                                                <RowRadioButtonsGroup
+                                                    values={optionValues}
+                                                    name='status'
+                                                    onChangee={handleInputChange}
+                                                />
+                                            </label>
+
+                                                {/* <label>to-do
+                                                    <input 
+                                                        type="radio" 
+                                                        name='status' 
+                                                        value="to-do" 
+                                                        onChange={handleInputChange} 
+                                                        checked={ editedTask.status === 'to-do' ? true : false }
+                                                    />
+                                                </label> */}
+                                                
+                                                {/* <label>Doing
+                                                    <input 
+                                                        type="radio" 
+                                                        name='status' 
+                                                        value="doing" 
+                                                        onChange={handleInputChange} 
+                                                        checked={ editedTask.status === 'doing' ? true : false }
+                                                    />
+                                                </label> */}
+
+                                                {/* <label>Done
+                                                    <input 
+                                                    type="radio" 
+                                                    name='status' 
+                                                    value="done" 
+                                                    onChange={handleInputChange} 
+                                                    checked={ editedTask.status === 'done' ? true : false }
+                                                    />
+                                                </label>/ */}
+                                            
+                                            <label><h4>Deadline</h4>
+                                                <TextInput
+                                                    type="date" 
+                                                    name="deadline" 
+                                                    onChange={handleInputChange} 
+                                                    value={editedTask.deadline}
+                                                />
+                                            </label>
+                                            
+                                            <label><h4>Description</h4>
+                                            <TextAreaInput
+                                                name="description"
+                                                onChange={handleInputChange}
+                                                value={editedTask.description || undefined}
+
+                                            />
+                                            </label>
+                                            {/*<textarea
                                                 name="description"
                                                 id="description"
                                                 cols="50"
@@ -123,7 +189,7 @@ const TaskDetails = () => {
                                                 placeholder='Esse campo é opcional'
                                                 onChange={handleInputChange}
                                                 value={editedTask.description || undefined}
-                                             />
+                                            />*/}
                                             <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
                                         </form>
                                     </div>

@@ -1,38 +1,68 @@
+@font-face {
+    font-family: "Coolvetica";
+    src: url('../../../src/assets/coolvetica\ rg.otf') format('truetype');
+}
+
+
 .container{
-    position: relative;
-    background-color: white;
-    //border: 2px solid green;
-    padding: 12px;
-    width: 500px;
-    box-shadow: -5px 0 10px 5px rgba(0, 0, 0, 0.187);
 
     h1{
+        margin-left: 15px;
         margin-bottom: 16px;
+        font-weight: 500;
+        font-family: 'Coolvetica';
     }
 
-    .comeBack_btn{
-        position: absolute;
-        left: -100px;
-        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.245);
 
+    background-color: white;
+    //border: 2px solid green;
+    min-width: 400px;
+    min-height: 100vh;
+    max-width: 500px;
+    position: absolute;
+    right: 0;
+    box-shadow: -5px 0 10px 5px rgba(0, 0, 0, 0.187);
+
+    .form_ct{
+        //border: 2px solid orange;
+
+        &  button{
+            margin-top: 12px;
+        }
+
+        label > h4{
+            
+            margin-top: 12px;
+        
+        }
     }
+
     
     .task_data_and_buttons{
+        position: absolute;
         //border: 2px solid rgb(19, 0, 193);
-        height: calc(100% - 10%);
+        min-height: 80%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding: 0 15px;
+        padding-bottom: 12px;
+        
+        
 
         .task_data{
             //border: 3px solid pink;
+
+
 
             .desc_ct{
                 max-width: 200px;
                 min-height: 100px;
                 max-height: 200px;
                 background-color: rgb(232, 232, 232);
-                padding: 8px;
+                //border: 2px solid brown;
+                
                 border-radius: 8px;
                 overflow-y:auto;
             }
@@ -41,10 +71,6 @@
                 //border: 3px solid pink;
                 display: flex;
                 justify-content: space-between;
-            }
-
-            & > div, span, h3{
-                margin: 4px 0;
             }
         }
 
@@ -67,4 +93,14 @@
     
     }
 }
+
+.comeBack_btn{
+    //border: 2px solid orangered;
+    position: absolute;
+    left: -100px;
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.245);
+
+}
+
+
 
