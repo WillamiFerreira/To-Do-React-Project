@@ -21,15 +21,6 @@ const SelectCategory = ({onChange, value, label, name}) => {
     }, [])
 
     return (
-        /*<label> Category
-            <select name="categories" onChange={onChange} value={value}>
-                {
-                    categories.map((category) => (
-                        <option key={category.id} value={category.name}>{category.name}</option>
-                    ))
-                }
-            </select>
-        </label>*/
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" >{label}</InputLabel>
             <Select

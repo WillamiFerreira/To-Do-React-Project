@@ -11,10 +11,12 @@ const Home = () => {
     return (
         <div className={styles.container}>
             <div>
-            <Button onClick={toAddNewTaskPage}>Add New Task</Button>
+            <div className={styles.buttom_ct}>
+                <Button onClick={toAddNewTaskPage}>Add New Task</Button>
+            </div>
             <ListView />
             </div>
-            <Outlet />
+            <Outlet /> {/*Task detail page */}
         </div>
     );
 };

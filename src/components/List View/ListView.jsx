@@ -21,8 +21,8 @@ const ListView = () => {
     }, [])
 
     return (
-        <div className={styles.containertemId}>
-            <div className="list">
+        <div className={styles.container}>
+            <div className={styles.list}>
                 <ul>
                     {data.map(task => (
                         <li 
