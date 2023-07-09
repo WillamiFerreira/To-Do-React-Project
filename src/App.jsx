@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom"
-//import ListView from "./components/List View/ListView"
-//import Home from "./routes/Home/Home"
 
 
 function App() {
@@ -8,8 +6,6 @@ function App() {
 
   return (
     <>
-    {/*<ListView />*/}
-    {/*<Home />*/}
     <Outlet />
     </>
   )

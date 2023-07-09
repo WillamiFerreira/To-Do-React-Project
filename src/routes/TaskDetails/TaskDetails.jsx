@@ -66,7 +66,7 @@ const TaskDetails = () => {
         }  
 
         navigate(`/${id}`)
-        window.location.reload();
+        //window.location.reload();
     }
 
     const excluirTask = async (e) => {
