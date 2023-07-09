@@ -25,15 +25,11 @@ const AddNewTask = () => {
 
     //Função que constroi o objeto
     const handleInputChange = (e) => {
-        console.log(e)
         const {name, value} = e.target;
         setFormValues({...formValues, [name]: value})
 
     }
 
-    //console.log(deadLine)
-
-    //console.log(formValues)
 
     //Enviando a task criada para o BD -----------------
 

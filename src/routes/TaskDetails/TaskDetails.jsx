@@ -30,7 +30,7 @@ const TaskDetails = () => {
 
         const fetchData = async () => {
             try{
-                axios.get(`${uri}/tasks/${id}`)
+                axios.get(`${uri}tasks/${id}`)
                 .then(res => setPickedTask(res.data))
             }catch(err){
                 console.log("Deu erro, meu patrão ==> ", err)
@@ -59,7 +59,7 @@ const TaskDetails = () => {
         e.preventDefault()
         const formData = new FormData(e.target);
         try{
-            axios.put(`${uri}/tasks/${id}`, Object.fromEntries(formData) )
+            axios.put(`${uri}tasks/${id}`, Object.fromEntries(formData) )
             toggleProjectForm()
         } catch(err){
             console.log(err)
