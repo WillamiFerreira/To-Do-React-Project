@@ -63,7 +63,7 @@ const TaskDetails = () => {
             console.log(err)
         }  
 
-        navigate('/')
+        navigate(`/${id}`)
         window.location.reload();
     }
 
