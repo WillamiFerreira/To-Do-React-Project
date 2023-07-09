@@ -9,6 +9,8 @@ import TextAreaInput from '../../components/form Fields/TextAreaInput';
 import TextInput from '../../components/form Fields/TextInput';
 import Buttom from '../../components/Buttom/Buttom'
 
+const uri = 'https://api-todo-list-ty31.onrender.com';
+
 
 const AddNewTask = () => {
     const navigate = useNavigate();
@@ -39,7 +41,7 @@ const AddNewTask = () => {
         const formData = new FormData(e.target);
 
         try{
-            axios.post('http://localhost:3000/tasks', Object.fromEntries(formData))
+            axios.post(`${uri}/tasks`, Object.fromEntries(formData))
         } catch(err){
             console.log('A porra do erro =>' + {err})
         }

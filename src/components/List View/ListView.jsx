@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react';
 import ListItem from '../List Item/ListItem';
 import styles from './ListView.module.scss'
 
+const uri = 'https://api-todo-list-ty31.onrender.com';
+
 const ListView = () => {
 
     const [data, setData] = useState([]);
@@ -10,7 +12,7 @@ const ListView = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                axios.get('http://localhost:3000/tasks')
+                axios.get(`${uri}/tasks`)
                 .then(res => setData(res.data))
             }catch(err){
                 console.log('Mano, deu esse erro aqui ==> ' + {err})

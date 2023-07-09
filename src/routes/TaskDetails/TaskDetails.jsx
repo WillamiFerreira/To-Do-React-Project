@@ -10,6 +10,8 @@ import TextAreaInput from '../../components/form Fields/TextAreaInput';
 import TextInput from '../../components/form Fields/TextInput';
 import RowRadioButtonsGroup from '../../components/form Fields/RowRadioButtonsGroup';
 
+const uri = 'https://api-todo-list-ty31.onrender.com';
+
 
 
 
@@ -28,7 +30,7 @@ const TaskDetails = () => {
 
         const fetchData = async () => {
             try{
-                axios.get(`http://localhost:3000/tasks/${id}`)
+                axios.get(`${uri}/tasks/${id}`)
                 .then(res => setPickedTask(res.data))
             }catch(err){
                 console.log("Deu erro, meu patrão ==> ", err)
@@ -57,7 +59,7 @@ const TaskDetails = () => {
         e.preventDefault()
         const formData = new FormData(e.target);
         try{
-            axios.put(`http://localhost:3000/tasks/${id}`, Object.fromEntries(formData) )
+            axios.put(`${uri}/tasks/${id}`, Object.fromEntries(formData) )
             toggleProjectForm()
         } catch(err){
             console.log(err)
@@ -70,7 +72,7 @@ const TaskDetails = () => {
     const excluirTask = async (e) => {
         e.preventDefault()
         try{
-            axios.delete(`http://localhost:3000/tasks/${id}`)
+            axios.delete(`${uri}/tasks/${id}`)
             .then(res => console.log(res))
 
         } catch(err){
