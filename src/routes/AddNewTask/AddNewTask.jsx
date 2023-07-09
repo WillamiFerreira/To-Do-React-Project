@@ -36,7 +36,6 @@ const AddNewTask = () => {
     //Enviando a task criada para o BD -----------------
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
         const formData = new FormData(e.target);
 
         try{
@@ -44,7 +43,9 @@ const AddNewTask = () => {
         } catch(err){
             console.log('A porra do erro =>' + {err})
         }
+        
         navigate('/')
+        window.location.reload();
     }
 
     console.log(formValues)
@@ -52,9 +53,9 @@ const AddNewTask = () => {
     return (
         <div className={styles.container}>
             <div className={styles.form_ct}>
-                <h1>
-                    {!formValues.title ? "Task Name" : formValues.title}
-                </h1>
+                <div className={styles.title_ct}>
+                    <h1>{!formValues.title ? "Task Name" : formValues.title}</h1>
+                </div>
 
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -133,7 +134,7 @@ const AddNewTask = () => {
                     </div>
                     <div className={styles.save_task_btn_ct}>
                         <Buttom onClick={() => navigate('/')}>Voltar</Buttom>
-                        <Buttom type='submit'>Save task</Buttom>
+                        <Buttom className={styles.submit_btn} type='submit'>Save task</Buttom>
                     </div>
                 </form>
 

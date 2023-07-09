@@ -64,6 +64,7 @@ const TaskDetails = () => {
         }  
 
         navigate('/')
+        window.location.reload();
     }
 
     const excluirTask = async (e) => {
@@ -77,6 +78,7 @@ const TaskDetails = () => {
         }
 
         navigate('/')
+        window.location.reload()
 
     }
     return (
@@ -87,19 +89,38 @@ const TaskDetails = () => {
             
                 {pickedTask.id ? ( //verifica se existe a prop "id" na tarefa obtida pela requisição
                     <>
-                        <h1>{pickedTask.title}</h1>
+                        <div className={styles.title_ct}>
+                            <h1>{pickedTask.title}</h1>
+                        </div>
 
                         <div className={styles.task_data_and_buttons}>
                             {
                                 !showProjectForm ? (
                                     <div className={styles.task_data}>
-                                        <span></span> <div className={styles.desc_ct}>{pickedTask.description}</div>
-                                        <h3><span>Status: </span>{pickedTask.status}</h3>
-                                        <h3><span>Author: </span>{pickedTask.author}</h3>
-                                        <h3><span>Category: </span>{pickedTask.categories}</h3>
+                                        {/* <span></span> <div className={styles.desc_ct}>{pickedTask.description}</div> */}
+                                        <label> <h4>Description: </h4>
+                                            <TextAreaInput value={pickedTask.description} disabled='true' />
+                                        </label>
+                                        {/* <h3><span>Status: </span>{pickedTask.status}</h3> */}
+                                        <label> <h4>Status: </h4>
+                                            <TextInput value={pickedTask.status} disabled='true'  />
+                                        </label>
+                                        {/* <h3><span>Author: </span>{pickedTask.author}</h3> */}
+                                        <label> <h4>Author: </h4>
+                                            <TextInput value={pickedTask.author} disabled='true'  />
+                                        </label>
+                                        <label> <h4>Category: </h4>
+                                            <TextInput value={pickedTask.categories} disabled='true'  />
+                                        </label>
                                         <div className={styles.dates}>
-                                            <h3><span>Criation date: </span>{pickedTask.data}</h3>
-                                            <h3><span>DeadLine: </span>{pickedTask.deadline}</h3>
+                                            {/* <h3><span>Criation date: </span>{pickedTask.data}</h3> */}
+                                            <label><h4>Create: </h4>
+                                                <TextInput value={pickedTask.data} disabled='true'  />
+                                            </label>
+                                            {/* <h3><span>DeadLine: </span>{pickedTask.deadline}</h3> */}
+                                            <label> <h4>Endline: </h4>
+                                                <TextInput value={pickedTask.deadline} disabled='true' />
+                                            </label>
                                         </div>
                                     </div>
                                 ): (
@@ -133,36 +154,6 @@ const TaskDetails = () => {
                                                     onChangee={handleInputChange}
                                                 />
                                             </label>
-
-                                                {/* <label>to-do
-                                                    <input 
-                                                        type="radio" 
-                                                        name='status' 
-                                                        value="to-do" 
-                                                        onChange={handleInputChange} 
-                                                        checked={ editedTask.status === 'to-do' ? true : false }
-                                                    />
-                                                </label> */}
-                                                
-                                                {/* <label>Doing
-                                                    <input 
-                                                        type="radio" 
-                                                        name='status' 
-                                                        value="doing" 
-                                                        onChange={handleInputChange} 
-                                                        checked={ editedTask.status === 'doing' ? true : false }
-                                                    />
-                                                </label> */}
-
-                                                {/* <label>Done
-                                                    <input 
-                                                    type="radio" 
-                                                    name='status' 
-                                                    value="done" 
-                                                    onChange={handleInputChange} 
-                                                    checked={ editedTask.status === 'done' ? true : false }
-                                                    />
-                                                </label>/ */}
                                             
                                             <label><h4>Deadline</h4>
                                                 <TextInput
@@ -181,15 +172,6 @@ const TaskDetails = () => {
 
                                             />
                                             </label>
-                                            {/*<textarea
-                                                name="description"
-                                                id="description"
-                                                cols="50"
-                                                rows="6"
-                                                placeholder='Esse campo é opcional'
-                                                onChange={handleInputChange}
-                                                value={editedTask.description || undefined}
-                                            />*/}
                                             <Buttom type='submit' style='editar_btn'>Salvar</Buttom>
                                         </form>
                                     </div>

@@ -1,6 +1,6 @@
 import Textarea from '@mui/joy/Textarea';
 
-const TextAreaInput = ({placeholder, value, onChange, name}) => {
+const TextAreaInput = ({placeholder, value, onChange, name, disabled}) => {
     return (
         <Textarea 
             placeholder={placeholder} 
@@ -9,6 +9,7 @@ const TextAreaInput = ({placeholder, value, onChange, name}) => {
             value={value} 
             onChange={onChange}
             name={name}
+            disabled={disabled}
             variant='outlined'
             size='lg'
             
