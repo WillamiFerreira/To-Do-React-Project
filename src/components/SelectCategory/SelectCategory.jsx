@@ -6,12 +6,15 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
+const uri = 'https://api-todo-list-ty31.onrender.com';
+
+
 const SelectCategory = ({onChange, value, label, name}) => {
     const [categories, setCategories] = useState([]);
     useEffect (() => {
         const fetchData = async () => {
             try{
-                axios.get('http://localhost:3000/tasks')
+                axios.get(`${uri}/tasks`)
                 .then(res => setCategories(res.data[0].categories))
             } catch(err){
                 console.log(err)
